@@ -26,9 +26,9 @@ def QueryAllLanguagesForAuthenticatedCatalog():
             langtool = self.REQUEST.get('LANGUAGE_TOOL', None)
             if langtool is not None:
                 if not langtool.tool.isAnonymousUser():
-                    if REQUEST is not None:
+                    if REQUEST is not None and not REQUEST.has_key('Language'):
                         REQUEST['Language'] = 'all'
-                    else:
+                    elif REQUEST is None and not kw.has_key('Language'):
                         kw['Language'] = 'all'
 
         return self.__valentine_old_searchResults(REQUEST, **kw)
